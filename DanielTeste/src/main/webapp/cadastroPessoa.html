@@ -1,0 +1,106 @@
+<html>
+<head>
+<script	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
+<script	src="../js/controller.js"></script>
+<link rel="stylesheet" href="../css/app.css" >
+<head>
+<body ng-app="myApp" ng-controller="PessoaController">
+	<h1>Cadastro</h1>
+	<form name="form1" ng-submit="salvarPessoa(form1.$valid)" novalidade>
+		<table>
+			<tr>
+				<th colspan="2">Adicionar/Editar Pessoa</th>
+			</tr>
+			<tr>
+				<td>Nome</td>
+				<td><input type="text" ng-model="pessoaForm.nome" name="nome" required/>
+				<p ng-show="form1.nome.$invalid && !form1.nome.$pristine" class="help-block">Seu nome é obrigatório</p>
+				</td>
+				
+    
+			</tr>
+			<tr>
+				<td>Email</td>
+				<td><input type="text" ng-model="pessoaForm.email" name="email" required/></td>
+			</tr>		
+			<tr>
+				<td>CPF</td>
+				<td><input type="text" ng-model="pessoaForm.cpf" required/></td>
+			</tr>
+				<tr>
+				<td>Data Nascimento</td>
+				<td><input type="date" ng-model="pessoaForm.dtNascimento" required/></td>
+			</tr>
+			<tr>
+				<td>Sexo</td>
+				<td> <span>Masculino <span></Span><input type="radio" ng-model="pessoaForm.sexo" value="Masculino" />
+				<span>Feminino <span></span> <input type="radio" ng-model="pessoaForm.sexo" value="Feminino" />
+				</td>
+			</tr>
+			<tr>
+				<td>Estado Civil</td>
+				<td> <select ng-model="pessoaForm.estadoCivil" required>
+				<option value="">Selecione</option>				
+				<option value="Solteiro">SOLTEIRO</option>
+				<option value="Casado">CASADO</option>
+				<option value="Divorciado">DIVORCIADO</option>
+				<option value="Separado">SEPARADO</option>
+				<option value="Viúvo">VIÚVO</option>
+				</select>
+				</td>
+				
+			</tr>
+			<tr>
+				<td>Ativo</td>
+				<td><input type="checkbox" ng-model="pessoaForm.ativo" value="true" required/></td>
+			</tr>
+			<tr>
+				<td colspan="2"><input type="submit" value="Salvar"
+					class="blue-button"/></td>
+			</tr>
+		</table>
+	</form>
+	<table>
+			<tr>
+				<th colspan="3">Pesquisar</th>
+			</tr>
+			<tr>
+				<td>CPF</td>
+				<td><input type="text" ng-model="cpf"/>
+				<td colspan="2"><a ng-click="buscarPorCpf(cpf)" class="blue-button">Pesquisar</a></td>
+				</td>
+			</tr>
+			<tr>
+				<td>Nome</td>
+				<td><input type="text" ng-model="nome"/>
+				<td colspan="2"><a ng-click="buscarPorNome(nome)" class="blue-button">Pesquisar</a></td>
+				</td>
+			</tr>
+	</table>
+	<table>
+		<tr>
+			<th>Nome</th>
+			<th>Email</th>
+			<th>CPF</th>
+			<th>Data Nascimento</th>
+			<th>Sexo</th>
+			<th>Estado Civil</th>
+			<th>Ativo</th>
+			<th></th>
+		</tr>
+		<tr ng-repeat="pessoa in pessoas">
+			<td>{{ pessoa.nome }}</td>
+			<td>{{ pessoa.email }}</td>
+			<td>{{pessoa.cpf}}</td>
+			<td>{{pessoa.dtNascimento | date : 'dd-MM-yyyy'}}</td>
+			<td>{{pessoa.sexo}}</td>
+			<td>{{pessoa.estadoCivil}}</td>									
+			<td ng-if="pessoa.ativo == true">Sim</td>
+			<td ng-if="pessoa.ativo == False">Não</td>
+			<td> <a ng-click="editPessoa(pessoa)" class="blue-button">Edit</a>|<a ng-click="deletarPessoa(pessoa)" class="red-button">Delete</a>
+				
+			</td>
+		</tr>
+	</table>
+</body>
+</html>

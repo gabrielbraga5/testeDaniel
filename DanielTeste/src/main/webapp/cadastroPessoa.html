@@ -6,7 +6,7 @@
 <head>
 <body ng-app="myApp" ng-controller="PessoaController">
 	<h1>Cadastro</h1>
-	<form name="form1" ng-submit="salvarPessoa(form1.$valid)" novalidade>
+	<form name="form1" ng-submit="salvarPessoa(form1.$valid)">
 		<table>
 			<tr>
 				<th colspan="2">Adicionar/Editar Pessoa</th>
@@ -22,10 +22,12 @@
 			<tr>
 				<td>Email</td>
 				<td><input type="text" ng-model="pessoaForm.email" name="email" required/></td>
+				<p ng-show="form1.email.$invalid && !form1.email.$pristine" class="help-block">Seu Email é obrigatório</p>
 			</tr>		
 			<tr>
 				<td>CPF</td>
-				<td><input type="text" ng-model="pessoaForm.cpf" required/></td>
+				<td><input type="text" ng-model="pessoaForm.cpf" name="cpf" required/></td>
+				<p ng-show="form1.cpf.$invalid && !form1.cpf.$pristine" class="help-block">Seu cpf é obrigatório</p>
 			</tr>
 				<tr>
 				<td>Data Nascimento</td>
